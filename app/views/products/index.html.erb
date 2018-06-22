@@ -1,0 +1,68 @@
+  <h3>Welcome <%= @user.first_name %> </h3>
+
+
+
+<h2>All Products</h2>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Product</th>
+        <th>Seller</th>
+        <th>Date Posted</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+
+      <% @products.each do |product| %>
+
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.user.first_name %></td>
+        <td><%= product.created_at.strftime("%b %d %Y ") %></td>
+        <td><%= product.price %></td>
+        <td> <a href="/markets/<%= product.id %>">Buy</a> </td>
+      </tr>
+      <% end %>
+   
+  
+
+    </tbody>
+  </table>
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h3 align="right"><a href="/products/<%= @user.id %>">Go to Dashboard</a></h3>
+  <h3 align="right"><a href="/sessions">Logout</a></h3>

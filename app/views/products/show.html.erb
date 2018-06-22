@@ -1,0 +1,107 @@
+  <h1>Hi <%= @user.first_name %> </h1>
+
+      <div>
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <p><font color= "red"><%= error %></font></p>
+      <% end%>
+    <% end %>
+  </div>
+
+  <h3>Sell Product</h3>
+
+  	<form action ="/products/<%= @user.id %>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+
+	<label>Name </label>
+	<input type="text" name="name"/>
+
+	<label>Amount </label>
+	<input type="integer" name="price"/>
+
+	<button type="submit">Sell</button>
+
+</form>	
+
+<h2>Products not yet sold</h2>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Product</th>
+        <th>Date Posted</th>
+        <th>Amount</th>
+        <th>Action</th>
+      </tr>
+
+      <% @user.products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.created_at.strftime("%b %d %Y ") %></td>
+        <td><%= product.price %></td>
+        <td> <a href="/products/<%= product.id %>" data-method="delete"> Remove </a>  </td>
+      </tr>
+      <% end %>
+  
+
+    </tbody>
+  </table>
+
+
+
+    <h2>Sales</h2>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Product</th>
+        <th>Date Bought</th>
+        <th>Buyer</th>
+        <th>Amount</th>
+      </tr>
+
+      <% @sales.each do |market| %>
+      <tr>
+        <td><%= market.product.name %></td>
+        <td><%= market.created_at.strftime("%b %d %Y ") %></td>
+        <td><%= market.product.user.first_name %></td>
+        <td><%= market.product.price %> </a> </td>
+      </tr>
+      <% end %>
+  
+
+    </tbody>
+  </table>
+
+
+
+
+  <h2>Purchases</h2>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Product</th>
+        <th>Date Bought</th>
+        <th>Seller</th>
+        <th>Amount</th>
+      </tr>
+
+      <% @market.each do |market| %>
+      <tr>
+        <td><%= market.product.name %></td>
+        <td><%= market.created_at.strftime("%b %d %Y ") %></td>
+        <td><%= market.product.user.first_name %></td>
+        <td><%= market.product.price %> </a> </td>
+      </tr>
+      <% end %>
+  
+
+    </tbody>
+  </table>
+
+  
+
+
+  <h3 align="right"><a href="/sessions">Logout</a></h3>
+  <h3 align="right"><a href="/products">Goto All Products</a></h3>
